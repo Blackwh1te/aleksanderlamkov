@@ -34,18 +34,24 @@
       });
       
 
-
+      let returnLink = $('.return__link');
 
       $('.menu__item').click(function() {
          $menu.hide();
+         returnLink.slideToggle(300);  
          let sectionName = $(this).data('name');
-         console.log(sectionName);
-         $(`section.${sectionName}`).slideToggle(800);
-
-         
+         $(`section.${sectionName}`).slideToggle(800).addClass('active');       
       });
 
-      $menu.hide();
+      // $menu.hide();
+
+      returnLink.click(function() {
+         $(`section.active`).hide();
+         $menu.slideToggle(300);  
+         // this.hide();
+         returnLink.slideToggle(300);  
+      });
+
    });
 })(jQuery);
 

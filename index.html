@@ -42,40 +42,67 @@
 	<main>
 		<section class="about">
 			<h2>About me</h2>	
-			<img class="selfie" src="images/my-photo.jpg" alt="Моя фотография">	
-			<ul>
+			<!-- <img class="selfie" src="images/my-photo.jpg" alt="Моя фотография">	 -->
+			<div class="selfie c-glitch" style="background-image: url('images/my-photo.jpg');">
+				<div class="c-glitch__img" style="background-image: url('images/my-photo.jpg');"></div>
+				<div class="c-glitch__img" style="background-image: url('images/my-photo.jpg');"></div>
+				<div class="c-glitch__img" style="background-image: url('images/my-photo.jpg');"></div>
+				<div class="c-glitch__img" style="background-image: url('images/my-photo.jpg');"></div>
+				<div class="c-glitch__img" style="background-image: url('images/my-photo.jpg');"></div>
+			</div>
+			<ul class="simple-list">
 				<li>Name: Aleksander Lamkov</li>
 				<li>Age: 24</li>
-				<li>City: Chelyabinsk, Russia</li>
+				<li>City: Chelyabinsk</li>
 			</ul>	
 		</section>
 		<section class="education">
 			<h2>Education</h2>	
-			<ul>
-				<li>South Ural State University (2014-2018), Bachelor's degree in Software Engineering</li>
-				<li><a href="https://ietn.susu.ru/09-04-04/" target="_blank">South Ural State University (2018-2020), Master’s degree in Software Engineering (security and protection of software systems)</a></li>
+			<ul class="simple-list">
+				<li>South Ural State University (2014 — 2018), Bachelor's degree in Software Engineering</li>
+				<li>South Ural State University (2018 — 2020), Master’s degree in Software Engineering (security and protection of software systems)</li>
 			</ul>	
 		</section>
 		<section class="career">
 			<h2>Сareer</h2>
-			<ul>
-				<li>Ribbla, 2020-present</li>
+			<ul class="simple-list">
+				<li><a class="outside-link" href="https://ribbla.com/" target="_blank">Ribbla</a>, Junior Frontend Developer, 2020 — present</li>
 			</ul>		
 		</section>
 		<section class="skills">
-			<h2>Soft skills</h2>	
-			<ul>
-				<li>Communication</li>
-				<li>Creativity</li>
-				<li>Decisiveness</li>
-				<li>Flexibility</li>
-				<li>Leadership</li>
-				<li>Problem Solving</li>
-				<li>Responsibility</li>
-				<li>Self-Motivation</li>
-				<li>Teamwork</li>
-				<li>Time management</li>
-			</ul>		
+			<div class="cols">
+				<div class="left">					
+					<h2>Soft skills</h2>	
+					<ul class="simple-list">
+						<li>Communication</li>
+						<li>Creativity</li>
+						<li>Decisiveness</li>
+						<li>Flexibility</li>
+						<li>Leadership</li>
+						<li>Problem Solving</li>
+						<li>Responsibility</li>
+						<li>Self-Motivation</li>
+						<li>Teamwork</li>
+						<li>Time management</li>
+					</ul>	
+				</div>
+				<div class="right">					
+					<h2>Hard skills</h2>	
+					<ul class="simple-list">
+						<li>HTML5</li>
+						<li>CSS3</li>
+						<li>JavaScript</li>
+						<li>SASS/SCSS</li>
+						<li>jQuery</li>
+						<li>BEM</li>
+						<li>CMS Bitrix</li>
+						<li>CMS Drupal</li>
+						<li>Git</li>
+						<li>Figma</li>
+						<li>Adobe Photoshop</li>
+					</ul>	
+				</div>
+			</div>		
 		</section>
 		<section class="contacts">
 			<h2>Contacts</h2>	
@@ -94,6 +121,9 @@
 
 
 		</section>
+		<div class="return">
+			<a class="return__link">Main menu</a>
+		</div>
 	</main>
 	<footer></footer>
 
