@@ -1,0 +1,225 @@
+@import "_reset";
+
+// === Variables =====
+$perspective:     60rem;
+$font-size:       4.25rem;
+$split-position:  49%;
+$split-thickness: 4px;
+// $split-color:     #FF2C75;
+// $split-color:     #FFBB00;
+$split-color:   #FF9200;
+$titleColor:    #FF9200;
+
+// === Settings =====
+%font-settings {
+   font-family: "Gilroy ExtraBold", system-ui, sans-serif;
+   font-style: normal;
+   font-weight: normal;
+   -webkit-font-smoothing: antialiased;
+   -webkit-font-kerning: normal;
+   -webkit-text-size-adjust: 100%;
+}
+
+// === Codepen Setup =====
+html,
+body {
+   width: 100vw;
+   height: 100vh;
+}
+
+body {
+   position: fixed;
+   display: flex;
+   align-items: center;
+   justify-content: center; 
+
+   @extend %font-settings;
+   color: #FFFFFF;
+
+   // background: linear-gradient(45deg, #02001F,#1F1B4E);
+   background: rgb(203,188,212);
+   background: linear-gradient(32deg, rgba(203,188,212,1) 0%, rgba(79,103,156,1) 49%, rgba(2,17,59,1) 100%);
+
+   transform-style: preserve-3d;
+   transform: perspective($perspective);
+}
+
+.menu {
+   &__list {
+      font-size: $font-size;
+      line-height: 1.2;
+      text-transform: uppercase;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: rotateX(-10deg) rotateY(20deg); // overwritten by JS
+   }
+
+   &__item {
+      position: relative;
+      color: transparent;
+      cursor: pointer;
+      
+      // === Split Line =====
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: $split-position;
+        left: -10%;
+        right: -10%;
+        height: $split-thickness;
+        border-radius: $split-thickness;
+        margin-top: -($split-thickness / 2);
+        background: $split-color;
+        transform: scale(0);
+        transition: transform .8s cubic-bezier(.16,1.08,.38,.98);
+        z-index: 1;
+      }
+
+      // === Where the fun stuff happens =====
+      &:hover,
+      &:active {
+         .mask { 
+            color: #FFF; 
+            transform: 
+               skewX(12deg) 
+               translateX(5px); 
+
+            & + .mask { 
+               transform: 
+                  skewX(12deg) 
+                  translateX(-5px); 
+            }
+         }
+
+         &:before { 
+            transform: scale(1); 
+         }
+      }
+   }
+}
+
+// === Top/bottom mask =====
+.mask {
+   position: absolute;
+   top: 0;   
+
+   display: block;
+   height: $split-position;
+   overflow: hidden;
+
+   color: $split-color;
+   transition: all .8s cubic-bezier(.16,1.08,.38,.98);
+
+   span { 
+      display: block; 
+   }
+
+   // === Bottom mask specific =====
+   & + .mask {
+      top: $split-position - 0.1;
+      height: 100 - $split-position + 0.1;
+      span { 
+         transform: translateY(-$split-position); 
+      }
+   }
+}
+
+.selfie {
+   width: 300px;
+}
+
+main section  {
+   display: none;
+
+   padding: 25px;
+   border-radius: 10px;
+   &.contacts {
+      display: block;
+   }
+}
+
+h2 {
+   font-size: 32px;
+   font-weight: 500;
+   text-transform: uppercase;
+   color: $titleColor;
+}
+
+
+.contacts {
+   &__list {
+      display: flex;
+      position: absolute;
+      top: calc(50% + 100px);
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+
+   &__item {
+      &:nth-child(1) a:before {
+         background: #2787F5;
+      }
+      &:nth-child(2) a:before {
+         background: #0088cc;
+      }
+      &:nth-child(3) a:before {
+         background: #EA4335;
+      }
+   }
+
+   &__link {
+      position: relative;
+      z-index: 1;
+
+      display: block;
+      margin: 0 10px;
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+
+      font-size: 35px;
+      line-height: 80px;
+      text-align: center;
+
+      background: #FFFFFF;
+      border: 3px solid #FFFFFF;
+      border-radius: 50%;
+
+      .icon {
+         position: relative;
+         z-index: 3;
+
+         color: #262626;
+
+         transition: .5s;
+      }
+
+      &:hover {
+         .icon {
+            color: #FFFFFF;
+            transform: rotateY(360deg);
+         }
+
+         &:before {
+            top: 0;
+         }
+      }
+
+      &:before {
+         content: "";
+         position: absolute;         
+         top: 100%;
+         left: 0;
+         z-index: 2;
+
+         width: 100%;
+         height: 100%;
+
+         background: #FF0000;
+         transition: .5s;
+      }
+   }
+}
