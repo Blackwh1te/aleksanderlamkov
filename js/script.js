@@ -43,12 +43,9 @@
          $(`section.${sectionName}`).slideToggle(800).addClass('active');       
       });
 
-      // $menu.hide();
-
       returnLink.click(function() {
          $(`section.active`).hide();
          $menu.slideToggle(300);  
-         // this.hide();
          returnLink.slideToggle(300);  
       });
 
