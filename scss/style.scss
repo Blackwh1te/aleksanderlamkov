@@ -262,14 +262,12 @@ a {
 .selfie {
    position: relative;
    width: 300px !important;
-   // height: 470px !important;
    height: 514px !important;
    margin: 0px auto 24px auto;
 
    &:after {      
       content: "Hover me!";
       position: absolute;
-      // top: -20px;
       top: 90px;
       right: -80px;
       font-family: 'Permanent Marker', cursive;
@@ -673,9 +671,7 @@ a {
 @media screen and (max-width: 576px) {
    .selfie {
       width: 200px !important;
-      // height: 300px !important;
       height: 327px !important;
-      // margin: 0px auto 10px auto;
       margin: -40px auto 10px auto;
 
       &:after {
@@ -749,8 +745,6 @@ a {
          line-height: 60px;
       }
    }
-
-
 }
 /*** </media queries> ***/
 /************************/
