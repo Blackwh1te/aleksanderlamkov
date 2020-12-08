@@ -49,6 +49,27 @@
          returnLink.slideToggle(300);  
       });
 
+
+      function getAge(birthYear, birthMonth, birthDay) {
+         let now = new Date(); //Текущя дата
+         let today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); //Текущя дата без времени
+         let dob = new Date(birthYear, birthMonth, birthDay); //Дата рождения
+         let dobnow = new Date(today.getFullYear(), dob.getMonth(), dob.getDate()); //ДР в текущем году
+         let age; //Возраст
+         
+         //Возраст = текущий год - год рождения
+         age = today.getFullYear() - dob.getFullYear();
+         //Если ДР в этом году ещё предстоит, то вычитаем из age один год
+         if (today < dobnow) {
+           age = age-1;
+         }            
+         return age;        
+      }
+      
+      let myAge = getAge(1996, 2, 4);
+
+      $('#age').text(myAge);
+
    });
 })(jQuery);
 
