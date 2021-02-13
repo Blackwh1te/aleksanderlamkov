@@ -39,6 +39,10 @@ $ligntColor: #FFFFFF;
    -webkit-text-size-adjust: 100%;
 }
 
+html {
+   overflow: hidden;
+}
+
 html,
 body {
    width: 100vw;
@@ -130,7 +134,8 @@ a {
 
 .return {
    position: fixed;
-   bottom: 20px;
+   z-index: 3;
+   top: 20px;
    left: 50px;
 
    &__link {
@@ -180,7 +185,10 @@ a {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transform: rotateX(-10deg) rotateY(20deg); // overwritten by JS
+
+      @media screen and (min-width: 768px) {
+         transform: rotateX(-10deg) rotateY(20deg); // overwritten by JS         
+      }
    }
 
    &__item {
@@ -204,27 +212,30 @@ a {
         transition: transform .8s cubic-bezier(.16,1.08,.38,.98);
         z-index: 1;
       }
-
-      // === Where the fun stuff happens =====
-      &:hover,
-      &:active {
-         .mask { 
-            color: #FFF; 
-            transform: 
-               skewX(12deg) 
-               translateX(5px); 
-
-            & + .mask { 
+      
+      @media screen and (min-width: 768px) {
+         // === Where the fun stuff happens =====
+         &:hover,
+         &:active {
+            .mask { 
+               color: #FFF; 
                transform: 
                   skewX(12deg) 
-                  translateX(-5px); 
+                  translateX(5px); 
+
+               & + .mask { 
+                  transform: 
+                     skewX(12deg) 
+                     translateX(-5px); 
+               }
+            }
+
+            &:before { 
+               transform: scale(1); 
             }
          }
-
-         &:before { 
-            transform: scale(1); 
-         }
       }
+
 
       &:not(:last-child) {
          margin: 0;

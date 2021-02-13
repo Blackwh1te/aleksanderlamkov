@@ -1,38 +1,40 @@
 (function ($) {
    $(document).ready(function() {
-	 
+
       let $menu = $('.menu__list');
       let $item = $('.menu__item');
       let w = $(window).width(); //window width
       let h = $(window).height(); //window height
 
-      $(window).on('mousemove', function(e) {
-         let offsetX = 0.5 - e.pageX / w; //cursor position X
-         let offsetY = 0.5 - e.pageY / h; //cursor position Y
-         let dy = e.pageY - h / 2; //@h/2 = center of poster
-         let dx = e.pageX - w / 2; //@w/2 = center of poster
-         let theta = Math.atan2(dy, dx); //angle between cursor and center of poster in RAD
-         let angle = theta * 180 / Math.PI - 90; //convert rad in degrees
-         let offsetPoster = $menu.data('offset');
-         let transformPoster = 'translate3d(0, ' + -offsetX * offsetPoster + 'px, 0) rotateX(' + (-offsetY * offsetPoster) + 'deg) rotateY(' + (offsetX * (offsetPoster * 2)) + 'deg)'; //poster transform
+      if (window.matchMedia("(min-width: 768px)").matches) {
 
-         //get angle between 0-360
-         if (angle < 0) {
-            angle = angle + 360;
-         }
-
-         //poster transform
-         $menu.css('transform', transformPoster);
-
-         //parallax for each layer
-         $item.each(function() {
-            let $this = $(this);
-            let offsetLayer = $this.data('offset') || 0;
-            let transformLayer = 'translate3d(' + offsetX * offsetLayer + 'px, ' + offsetY * offsetLayer + 'px, 20px)';
-            $this.css('transform', transformLayer);
-         });
-      });
-      
+         $(window).on('mousemove', function(e) {
+            let offsetX = 0.5 - e.pageX / w; //cursor position X
+            let offsetY = 0.5 - e.pageY / h; //cursor position Y
+            let dy = e.pageY - h / 2; //@h/2 = center of poster
+            let dx = e.pageX - w / 2; //@w/2 = center of poster
+            let theta = Math.atan2(dy, dx); //angle between cursor and center of poster in RAD
+            let angle = theta * 180 / Math.PI - 90; //convert rad in degrees
+            let offsetPoster = $menu.data('offset');
+            let transformPoster = 'translate3d(0, ' + -offsetX * offsetPoster + 'px, 0) rotateX(' + (-offsetY * offsetPoster) + 'deg) rotateY(' + (offsetX * (offsetPoster * 2)) + 'deg)'; //poster transform
+   
+            //get angle between 0-360
+            if (angle < 0) {
+               angle = angle + 360;
+            }
+   
+            //poster transform
+            $menu.css('transform', transformPoster);
+   
+            //parallax for each layer
+            $item.each(function() {
+               let $this = $(this);
+               let offsetLayer = $this.data('offset') || 0;
+               let transformLayer = 'translate3d(' + offsetX * offsetLayer + 'px, ' + offsetY * offsetLayer + 'px, 20px)';
+               $this.css('transform', transformLayer);
+            });
+         });         
+      }
 
       let returnLink = $('.return__link');
 
@@ -49,27 +51,19 @@
          returnLink.slideToggle(300);  
       });
 
-
-      function getAge(birthYear, birthMonth, birthDay) {
-         let now = new Date(); //Текущя дата
-         let today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); //Текущя дата без времени
-         let dob = new Date(birthYear, birthMonth, birthDay); //Дата рождения
-         let dobnow = new Date(today.getFullYear(), dob.getMonth(), dob.getDate()); //ДР в текущем году
-         let age; //Возраст
-         
-         //Возраст = текущий год - год рождения
-         age = today.getFullYear() - dob.getFullYear();
-         //Если ДР в этом году ещё предстоит, то вычитаем из age один год
-         if (today < dobnow) {
-           age = age-1;
-         }            
-         return age;        
+      function getAge(dateString) {
+         let today = new Date();
+         let birthDate = new Date(dateString);
+         let age = today.getFullYear() - birthDate.getFullYear();
+         let m = today.getMonth() - birthDate.getMonth();
+         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+         }
+         return age;
       }
       
-      let myAge = getAge(1996, 2, 4);
-
+      let myAge = getAge('1996.02.04');      
       $('#age').text(myAge);
 
    });
 })(jQuery);
-
