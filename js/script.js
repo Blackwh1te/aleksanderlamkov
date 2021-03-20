@@ -51,19 +51,29 @@
          returnLink.slideToggle(300);  
       });
 
-      function getAge(dateString) {
-         let today = new Date();
-         let birthDate = new Date(dateString);
-         let age = today.getFullYear() - birthDate.getFullYear();
-         let m = today.getMonth() - birthDate.getMonth();
-         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-         }
-         return age;
-      }
+      // function getAge(dateString) {
+      //    let today = new Date();
+      //    let birthDate = new Date(dateString);
+      //    let age = today.getFullYear() - birthDate.getFullYear();
+      //    let m = today.getMonth() - birthDate.getMonth();
+      //    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      //       age--;
+      //    }
+      //    return age;
+      // }
       
-      let myAge = getAge('1996.02.04');      
+      // let myAge = getAge('1996.02.04');      
+      // $('#age').text(myAge);
+
+      function calculate_age(dob) { 
+         var diff_ms = Date.now() - dob.getTime();
+         var age_dt = new Date(diff_ms);        
+         return Math.abs(age_dt.getUTCFullYear() - 1970);
+      }
+
+      let myAge = calculate_age(new Date(1996, 2, 4));
       $('#age').text(myAge);
+
 
    });
 })(jQuery);
